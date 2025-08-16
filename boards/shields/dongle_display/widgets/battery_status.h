@@ -13,10 +13,6 @@ struct zmk_widget_dongle_battery_status {
     sys_snode_t node;
     lv_obj_t *obj;
 };
-#if CONFIG_ZMK_BATTERY
+
 int zmk_widget_dongle_battery_status_init(struct zmk_widget_dongle_battery_status *widget, lv_obj_t *parent);
 lv_obj_t *zmk_widget_dongle_battery_status_obj(struct zmk_widget_dongle_battery_status *widget);
-#else
-int zmk_widget_dongle_battery_status_init(struct zmk_widget_dongle_battery_status *widget, lv_obj_t *parent) { return 0; }
-lv_obj_t *zmk_widget_dongle_battery_status_obj(struct zmk_widget_dongle_battery_status *widget) { return NULL; }
-#endif
