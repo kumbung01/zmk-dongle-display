@@ -74,6 +74,8 @@ lv_obj_t *zmk_display_status_screen() {
 #endif
 
 #if IS_ENABLED(CONFIG_ZMK_BATTERY)
+#warning CONFIG_ZMK_BATTERY is enabled, initializing battery status widget
+    LOG_DBG("Initializing dongle battery status widget");
     zmk_widget_dongle_battery_status_init(&dongle_battery_status_widget, screen);
     lv_obj_align(zmk_widget_dongle_battery_status_obj(&dongle_battery_status_widget), LV_ALIGN_TOP_RIGHT, 0, 0);
 #endif
