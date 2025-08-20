@@ -169,6 +169,8 @@ int zmk_widget_dongle_battery_status_init(struct zmk_widget_dongle_battery_statu
 
     widget_dongle_battery_status_init();
 
+    LOG_DBG("Dongle battery status widget initialized");
+    
     return 0;
 }
 
