@@ -74,6 +74,8 @@ static void draw_battery(lv_obj_t *canvas, uint8_t level, bool usb_present) {
 }
 
 static void set_battery_symbol(lv_obj_t *widget, struct battery_state state) {
+    LOG_DBG("Setting battery symbol for source %d, level %d, usb_present %d", state.source, state.level, state.usb_present);
+    LOG_DBG("ZMK_SPLIT_BLE_PERIPHERAL_COUNT + SOURCE_OFFSET = %d", ZMK_SPLIT_BLE_PERIPHERAL_COUNT + SOURCE_OFFSET);
     if (state.source >= ZMK_SPLIT_BLE_PERIPHERAL_COUNT + SOURCE_OFFSET) {
         LOG_ERR("Invalid battery source: %d", state.source);
         return;
