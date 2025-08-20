@@ -75,6 +75,7 @@ static void draw_battery(lv_obj_t *canvas, uint8_t level, bool usb_present) {
 
 static void set_battery_symbol(lv_obj_t *widget, struct battery_state state) {
     if (state.source >= ZMK_SPLIT_BLE_PERIPHERAL_COUNT + SOURCE_OFFSET) {
+        LOG_ERR("Invalid battery source: %d", state.source);
         return;
     }
     LOG_DBG("source: %d, level: %d, usb: %d", state.source, state.level, state.usb_present);
@@ -97,7 +98,14 @@ static void set_battery_symbol(lv_obj_t *widget, struct battery_state state) {
 
 void battery_status_update_cb(struct battery_state state) {
     struct zmk_widget_dongle_battery_status *widget;
-    SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) { set_battery_symbol(widget->obj, state); }
+    LOG_DBG("Updating battery status: source %d, level %d, usb_present %d", state.source, state.level, state.usb_present);
+    static int widget_cnt = 0;
+    SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) { 
+        set_battery_symbol(widget->obj, state); 
+        widget_cnt++;
+    }
+    LOG_DBG("Updated %d widgets with battery status", widget_cnt);
+    widget_cnt = 0;
 }
 
 static struct battery_state peripheral_battery_status_get_state(const zmk_event_t *eh) {
