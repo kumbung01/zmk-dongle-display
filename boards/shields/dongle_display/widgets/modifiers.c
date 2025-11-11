@@ -133,7 +133,7 @@ static struct modifiers_state modifiers_get_state(const zmk_event_t *eh) {
     }
 
     return (struct modifiers_state) {
-        .modifiers = zmk_hid_get_explicit_mods() | shift_state;
+        .modifiers = zmk_hid_get_explicit_mods() | shift_state,
     };
 }
 
