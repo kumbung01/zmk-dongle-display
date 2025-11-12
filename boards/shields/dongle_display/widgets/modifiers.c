@@ -126,7 +126,7 @@ void modifiers_update_cb(struct modifiers_state state) {
 }
 
 static struct modifiers_state modifiers_get_state(const zmk_event_t *eh) {
-    uint8_t shift_state = 0x0;
+    static uint8_t shift_state = 0x0;
     struct zmk_caps_word_state_changed *ev = as_zmk_caps_word_state_changed(eh);
     if (ev) {
          shift_state = ev->active ? (MOD_LSFT | MOD_RSFT) : 0x0;
